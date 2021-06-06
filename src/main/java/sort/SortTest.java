@@ -24,6 +24,7 @@ public class SortTest {
         int[] d = {3,8,6,1,2,5,7,4,9,0};
         bubbleSort(d);
         printArr(d);
+
     }
 
     /**

@@ -15,6 +15,7 @@
 /vcs.xml
 misc.xml
 modules.xml
-target/
+../target/
 .idea/
+../JavaAlgorithm.iml
 *.iml

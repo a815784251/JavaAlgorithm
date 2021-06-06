@@ -35,8 +35,6 @@ public class SortTest {
         int[] h = {3,8,6,1,2,5,7,4,9,0};
         mergeSort(h, 0, h.length-1);
         printArr(h);
-
-
     }
 
     /**

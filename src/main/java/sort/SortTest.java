@@ -25,6 +25,10 @@ public class SortTest {
         bubbleSort(d);
         printArr(d);
 
+        int[] f = {3,8,6,1,2,5,7,4,9};
+        shellSort(f);
+        printArr(f);
+
     }
 
     /**
@@ -105,6 +109,33 @@ public class SortTest {
         }
     }
 
+    /**
+     * 希尔排序
+     * 思路：把数组分为length/2 = d组
+     * d组成d组的元素执行插入排序(相当于把插入排序的1换成了N)
+     * 重复上述过程，直到N=1。(其实N=1就是执行完全的插入排序)
+     * @param a 数组
+     */
+    public static void shellSort(int[] a) {
+        int length = getLength(a);
+        int d = length;
+        while (d > 0) {
+            d = d / 2;
+            //分数数量遍历
+            for (int i = 0; i < d; i++) {
+                //当前分组内的数据进行插入排序
+                for (int j = i + d; j < length; j += d) {
+                    int k = j - d; //j为有序序列最后一位的位数
+                    int temp = a[j]; //要插入的元素
+                    for (; k >= 0 && temp < a[k]; k -= d) { //从后往前遍历。
+                        a[k + d] = a[k]; //向后移动d位
+                    }
+                    a[k + d] = temp;
+                }
+            }
+        }
+    }
+
     public static void swap(int[] a, int i, int j) {
         int temp = a[j];
         a[j] = a[i];
@@ -117,8 +148,8 @@ public class SortTest {
 
     private static void printArr(int[] a) {
         for (int num : a) {
-            System.out.println();
             System.out.print(num + " ");
         }
+        System.out.println();
     }
 }

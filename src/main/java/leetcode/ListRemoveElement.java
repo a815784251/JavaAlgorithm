@@ -1,4 +1,4 @@
-package letcode;
+package leetcode;
 
 /**
  * 从链表移除某个指定元素

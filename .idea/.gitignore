@@ -15,4 +15,4 @@
 /vcs.xml
 misc.xml
 modules.xml
-../target
+../target/*

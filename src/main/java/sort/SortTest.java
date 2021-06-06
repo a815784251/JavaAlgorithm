@@ -28,6 +28,14 @@ public class SortTest {
         int[] f = {3,8,6,1,2,5,7,4,9};
         shellSort(f);
         printArr(f);
+        int[] g = {3,8,6,1,2,5,7,4,9,0};
+        quickSort(g);
+        printArr(g);
+
+        int[] h = {3,8,6,1,2,5,7,4,9,0};
+        mergeSort(h, 0, h.length-1);
+        printArr(h);
+
 
     }
 
@@ -126,13 +134,93 @@ public class SortTest {
                 //当前分组内的数据进行插入排序
                 for (int j = i + d; j < length; j += d) {
                     int k = j - d; //j为有序序列最后一位的位数
-                    int temp = a[j]; //要插入的元素
-                    for (; k >= 0 && temp < a[k]; k -= d) { //从后往前遍历。
-                        a[k + d] = a[k]; //向后移动d位
+                    int temp = a[j];
+                    //区间内插入排序
+                    for (; k >= 0 && temp < a[k]; k -= d) {
+                        a[k + d] = a[k];
                     }
                     a[k + d] = temp;
                 }
             }
+        }
+    }
+
+    /**
+     * 快速排序
+     * 思想：以最左边的元素为基准，把大于最左边的元素都放到右边，
+     * 小于最左元素放到左边，然后递归进行，当start 和 end 相等 则排序完成
+     * @param a 数组
+     */
+    public static void quickSort(int[] a) {
+        int length = getLength(a);
+        quickSort(a, 0, length - 1);
+    }
+
+    public static void quickSort(int[] a, int start, int end) {
+        if (start < end) {
+            int temp = a[start];
+            int i = start;
+            int j = end;
+            while (i < j) {
+                while (a[i] < temp && i < j) {
+                    i++;
+                }
+                while (a[j] > temp && j > i) {
+                    j--;
+                }
+                if (i < j) {
+                    swap(a, i, j);
+                }
+            }
+
+            quickSort(a, start, j-1);
+            quickSort(a, j+1, end);
+        }
+    }
+
+    /**
+     * 归并排序
+     * 思想 数据一分为二 对分割的数递归划分，当数组长度为1时，就已经时排好序的，
+     * 这时候只要和划分的另外一个数据合并，递归执行
+     * @param a 数据
+     * @param start 开始下标
+     * @param end 结束下标
+     */
+    public static void mergeSort(int[] a, int start, int end) {
+
+        int mid = (start + end) / 2;
+        if (start < end) {
+            //分组
+            mergeSort(a, start, mid);
+            mergeSort(a, mid+1, end);
+            //合并
+            merge(a, start, mid, end);
+        }
+
+    }
+
+    public static void merge(int[] a, int start, int mid, int end) {
+        //存放当前需要合并的元素
+        int temp[] = new int[end - start + 1];
+        int i = start;
+        int j = mid+1;
+        int k = 0;
+        while (i <= mid && j <= end) {
+            if (a[i] < a[j]) {
+                temp[k++] = a[i++];
+            } else {
+                temp[k++] = a[j++];
+            }
+        }
+        while (i <= mid) {
+            temp[k++] = a[i++];
+        }
+        while (j <= end) {
+            temp[k++] = a[j++];
+        }
+        //排好序的重新放回a中
+        for (int m = 0; m < temp.length; m++) {
+            a[m + start] = temp[m];
         }
     }
 

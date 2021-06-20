@@ -35,6 +35,10 @@ public class SortTest {
         int[] h = {3,8,6,1,2,5,7,4,9,0};
         mergeSort(h, 0, h.length-1);
         printArr(h);
+
+        int[] i = {3,8,6,1,2,5,7,4,9,0};
+        heapSort(i);
+        printArr(i);
     }
 
     /**
@@ -222,6 +226,37 @@ public class SortTest {
         }
     }
 
+    public static void heapSort(int[] a) {
+        int length = a.length;
+        for(int i = 0; i < length - 1; i++) {
+            //建堆
+            buildMaxHeap(a,length - i - 1);
+            //交换堆顶和最后一个元素
+            swap(a,0,length - 1 - i);
+        }
+    }
+
+    /**
+     *堆排序 思路：模拟构建大顶堆，因为数组中当前下标i的左
+     * 节点和右节点分别2i和2i+1 从小右边的父亲节点开始遍历
+     * 让当前节点i的值比左右大。重复进行，数组第一个元素即是
+     * 最大值。再和最后一个元素交互即可
+     * @param a 数组
+     * @param lastIndex 最后一个元素下标
+     */
+    private static void buildMaxHeap(int[] a, int lastIndex) {
+        for (int i = (lastIndex / 2); i >= 0; i--) {
+            int left = i * 2;
+            int right = i * 2 + 1;
+            int maxIndex = left;
+            if (right <= lastIndex && a[right] > a[left]) {
+                maxIndex = right;
+            }
+            if (a[i] < a[maxIndex]) {
+                swap(a, i, maxIndex);
+            }
+        }
+    }
 
     public static void swap(int[] a, int i, int j) {
         int temp = a[j];

@@ -13,6 +13,7 @@ public class SortTest {
         insertSort(a);
         printArr(a);
 
+
         int[] b = {3,8,6,1,2,5,7,4,9,0};
         insertSortWhile(b);
         printArr(b);

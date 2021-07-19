@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 交替打印
+ * 线程交替打印，生产者消费者模型
  * @author JingHe
  * @date 2021-07-19 11:06
  */
